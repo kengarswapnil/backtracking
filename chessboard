@@ -12,7 +12,7 @@ class Main {
          }
          
          //diagonal
-         for(int i=row-1,j=col-1;i>=0 && j>=0;i--,j++){
+         for(int i=row-1,j=col-1;i>=0 && j>=0;i--,j--){
              if(queen[i][j]=='Q')
              {
                  return false;
@@ -31,28 +31,24 @@ class Main {
          
     }
     
-    static int count=0;
     
-    public static void queen(char queen[][], int row)
+    public static void Queen(char queen[][], int row)
     {
         if(row == queen.length)
         {
-            printarr(queen);
-            // System.out.println();
             count++;
+            System.out.println("Solution #" + count + ":");
+            printarr(queen);
             return ;
         }
         
         for(int i=0;i<queen.length;i++)
         {
                if(isSafe(queen ,row,i)){
-                 queen[row][i]='Q';
-                 queen(queen,row+1);
-                 queen[row][i]='X';
+                 queen[row][i] = 'Q';
+                 Queen(queen,row + 1);
+                 queen[row][i] = 'X';
                }
-                
-                 
-            
         }
     }
     
@@ -69,9 +65,11 @@ class Main {
           System.out.println();
     }
     
+    static int count = 0;
     
     public static void main(String[] args) {
         int n = 4;
+        count=0;
         char queen [][] = new char[n][n];
         
         for(int i=0;i<n;i++)
@@ -81,7 +79,7 @@ class Main {
                 queen[i][j]='X';
             }
         }
-        queen(queen,0);
-        System.out.println(count);
+        Queen(queen,0);
+        System.out.println("Total Solutions: " + count);
     }
 }
