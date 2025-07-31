@@ -1,0 +1,29 @@
+
+class Main {
+    
+    public static  void  backtrack(String s ,String res ,int n)
+    {
+        if(n == s.length())
+        {
+            if(res.length()==0)
+            {
+                System.out.println("null");
+            }else{
+                
+                  System.out.println(res);
+            }
+          
+            return;
+        }
+        
+        //choice 
+        backtrack(s,res+s.charAt(n),n+1);
+        //
+        backtrack(s,res,n+1);
+    }
+    
+    public static void main(String[] args) {
+        String s = "abc";
+        backtrack(s,"",0);
+    }
+}
