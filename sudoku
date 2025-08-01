@@ -1,0 +1,77 @@
+public class Sudoku {
+
+
+  public static boolean isSafe(int sudoku [][],int row ,int col,int i) {
+    // row 
+    for(int k=0;k<8;k++){
+      if(sudoku[k][col]== i){
+        return false;
+      }
+    }
+      
+    for(int j=0;j<8;j++){
+       if(sudoku[col][j]==i){
+        return false;
+       }
+    }
+
+
+    return true;
+
+  }
+
+
+  public static boolean sudoku(int sudoku[][], int row, int col) {
+    // base case
+    if (row == 9 && col == 9) {
+      return true;
+    } else if (row == 9) {
+      return false;
+    }
+
+    // reursion
+    int nextRow = 0, nextcol = col + 1;
+    if (col + 1 == 0) {
+      nextRow = row + 1;
+      nextcol = 0;
+    }
+
+    if (sudoku[row][col] != 0) {
+      return sudoku(sudoku, nextRow, nextcol);
+    }
+
+    for (int i = 1; i < 9; i++) {
+      if (isSafe(sudoku, row, col, i)) {
+        sudoku[row][col] = i;
+        if (sudoku(sudoku, nextRow, nextcol)) {
+          return true;
+        }
+        sudoku[row][col] = 0;
+      }
+    }
+    return false;
+  }
+
+  // print arr
+  public static void printarr(int sudoku[][]) {
+    for (int i = 0; i < sudoku.length; i++) {
+      for (int j = 0; j < sudoku.length; j++) {
+        System.out.println(sudoku[i][j] + " ");
+      }
+    }
+  }
+
+  public static void main(String[] args) {
+    int[][] sudoku = {
+        { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
+        { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
+        { 0, 9, 8, 0, 0, 0, 0, 6, 0 },
+        { 8, 0, 0, 0, 6, 0, 0, 0, 3 },
+        { 4, 0, 0, 8, 0, 3, 0, 0, 1 },
+        { 7, 0, 0, 0, 2, 0, 0, 0, 6 },
+        { 0, 6, 0, 0, 0, 0, 2, 8, 0 },
+        { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
+        { 0, 0, 0, 0, 8, 0, 0, 7, 9 }
+    };
+  }
+}
